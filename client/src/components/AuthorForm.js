@@ -1,8 +1,9 @@
-import React, {useState} from 'react';
+import React from 'react';
 import axios from 'axios';
 
 const AuthorForm = (props) => {
-    const [authorName, setAuthorName] = useState([]);
+    const {authorName, setAuthorName} = props;
+    
 
     const onSubmithandler = (e) => {
         e.preventDefault();
