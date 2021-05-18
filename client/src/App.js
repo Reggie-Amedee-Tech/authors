@@ -1,12 +1,18 @@
 import Main from './views/Main'
-import React, {useState} from 'react'
+import ListOfAuthors from './views/ListOfAuthors'
+import React, { useState } from 'react'
 import './App.css';
+import { Router } from '@reach/router'
 
 function App() {
   const [authorName, setAuthorName] = useState([]);
   return (
     <div className="App">
-      <Main authorName={authorName} setAuthorName={setAuthorName}/>
+      <Router>
+        <Main path="/author" authorName={authorName} setAuthorName={setAuthorName}/>
+        <ListOfAuthors path="/list" authorName={authorName} setAuthorName={setAuthorName}/>
+      </Router>
+
     </div>
   );
 }
