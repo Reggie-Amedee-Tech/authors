@@ -1,10 +1,15 @@
+const { Timestamp } = require('bson');
 const mongoose = require('mongoose');
 
 const AuthorSchema = new mongoose.Schema({
-    authorName: {type: String}
-})
+    authorName: {
+        type:  String,
+        required: [
+            true,
+            "Author Name is Required"
+        ]
+    }
+}, {timestamps: true})
 
-const Author = mongoose.model('Author', AuthorSchema);
-
-module.exports = Author;
+module.exports = mongoose.model('Author', AuthorSchema);
 

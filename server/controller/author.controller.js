@@ -1,15 +1,16 @@
 const Author = require('../model/author.model');
 
-module.exports.index = (request,response) => {
-    response.json({
-        message: "Author Databse"
-    })
-}
 
-module.exports.createAuthor = (request, response) => {
-    Author.create(request.body)
-    .then(res => response.json(res))
-    .catch(err => response.json(err))
+
+module.exports = {
+    createAuthor: (request, response) => {
+        const {authorName} = request.body;
+        Author.create({
+            authorName: authorName
+        })
+        .then(author => response.json(author))
+        .catch(err=> response.status(400).json(err))
+    }
 }
 
 module.exports.updateAuthor = (request, response) => {
@@ -22,4 +23,10 @@ module.exports.listAllAuthors = (request, response) => {
     Author.find({})
     .then(author=> response.json(author))
     .catch(err => response.json(err))
+}
+
+module.exports.deleteAuthor = (request, response) => {
+    Author.deleteOne({_id: request.params.id})
+        .then(deleteConfirmation=> response.json(deleteConfirmation))
+        .catch(err=>console.log(err))
 }

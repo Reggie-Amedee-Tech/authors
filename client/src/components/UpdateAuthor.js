@@ -2,25 +2,27 @@ import axios from 'axios';
 import React, {useState} from 'react';
 
 const UpdateAuthor = (props) => {
-    const[authorName, setAuthorName] = useState([])
+    const [authorName, setAuthorName] = useState("")
     const {id} = props;
 
     const updateHandler = (e) => {
         e.preventDefault();
 
-        axios('http://localhost:8000/api/author/' + id, {
+        axios.put('http://localhost:8000/api/author/' + id, {
             authorName
         })
             .then(res => console.log(res));
 
     }
 
+    
+
 
     return (
         <form onSubmit={updateHandler}>
             <p>
-                <label>Please type in a valid author: </label><br/>
-                <input type="text" onChange={(e) => setAuthorName(e.target.value)}/>
+                <label>Update Author Name: </label><br/>
+                <input type="text" onChange={(e) => setAuthorName(e.target.value)} value={authorName}/>
             </p>
             <input type="submit"/>
         </form>

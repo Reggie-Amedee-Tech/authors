@@ -1,12 +1,12 @@
 import UpdateAuthor from '../components/UpdateAuthor';
 import React from 'react';
 
-const AuthorPage = () => {
+const AuthorPage = (props) => {
 
 
     return(
         <div>
-            <UpdateAuthor/>
+            <UpdateAuthor id={props.id}/>
         </div>
     )
 }

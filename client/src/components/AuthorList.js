@@ -1,27 +1,28 @@
-import { navigate } from '@reach/router';
+import { Link } from '@reach/router';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 
 
 const AuthorList = (props) => {
-    const {authorName, setAuthorName} = props;
-    const [loaded, setLoaded] = useState(false);
-    
-    useEffect(() => {
-        axios.get('http://localhost:8000/api/authors')
-        .then(res=>{
-            setAuthorName(res.data)
-            setLoaded(true)
+const {removeFromDom} = props;
 
-        })
-        navigate('/list')
-    }, []);
+const deleteAuthor = (aid) => {
+axios.delete('http://localhost:8000/api/authors/' + aid)
+    .then(res=>{
+        removeFromDom(aid)
+    })
 
-    return(
+
+}
+
+    return (
         <div>
-        {props.authorName.map((author, i) => {
-            return <p key={i}>{author.authorName}</p>
-        })}
+            {props.authors.map((author, i) => {
+                return <p key={i}>
+                    <Link to={'/list/' + author._id + '/edit'} >{author.authorName}</Link>
+                    <button onClick={(e)=> deleteAuthor(author._id)}>Delete</button>
+                </p>
+            })}
         </div>
     )
 }
