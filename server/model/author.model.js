@@ -4,10 +4,10 @@ const mongoose = require('mongoose');
 const AuthorSchema = new mongoose.Schema({
     authorName: {
         type:  String,
-        required: [
-            true,
-            "Author Name is Required"
-        ]
+        required: [true,  "Author Name is Required"],
+        minlength: [3, 'Author has to be more then 3 characters!']
+        
+        
     }
 }, {timestamps: true})
 
