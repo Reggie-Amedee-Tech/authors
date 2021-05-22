@@ -7,16 +7,16 @@ import AuthorPage from './views/AuthorPage'
 
 
 function App(props) {
-  const [authorName, setAuthorName] = useState([]);
+  
 
   
   return (
     <div className="App">
 
       <Router>
-        <Main path="/author" authorName={authorName} setAuthorName={setAuthorName} />
+        <Main path="/author" />
         <AuthorPage path="/list/:id/edit"/>
-        <ListOfAuthors path="/list" authorName={authorName} setAuthorName={setAuthorName}/>
+        <ListOfAuthors path="/list" />
       </Router>
 
 

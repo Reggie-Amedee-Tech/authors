@@ -1,9 +1,11 @@
 import React, {useState} from 'react';
 import axios from 'axios';
+import { navigate } from '@reach/router';
+
 
 const AuthorForm = (props) => {
     const [authorName, setAuthorName] = useState("");
-    const [errors, setErrors] = useState([])
+    const [errors, setErrors] = useState([]);
 
 
     const onSubmithandler = (e) => {
@@ -11,7 +13,10 @@ const AuthorForm = (props) => {
         axios.post('http://localhost:8000/api/author', {
             authorName
         })
-            .then(res => console.log(res))
+            .then(res => {
+                console.log(res)
+                navigate('/list')
+                })
             .catch(err => {
                 const errorResponse = err.response.data.errors;
                 const errArr = []
@@ -20,6 +25,7 @@ const AuthorForm = (props) => {
                 }
                 setErrors(errArr);
             })
+            
             
     }
     return (

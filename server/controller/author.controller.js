@@ -1,7 +1,5 @@
 const Author = require('../model/author.model');
 
-
-
 module.exports = {
     createAuthor: (request, response) => {
         const {authorName} = request.body;
@@ -14,10 +12,12 @@ module.exports = {
 }
 
 module.exports.updateAuthor = (request, response) => {
-    Author.findOneAndUpdate({_id: request.params.id}, request.body, {new: true})
-    .then(updateAuthor => response.json(updateAuthor))
-    .catch(err => console.log(err))
+    Author.findOneAndUpdate({_id: request.params.id}, request.body, {new: true, runValidators: true})
+    .then(authorname=> response.json(authorname))
+    .catch(err=> response.status(400).json(err))
+
 }
+
 
 module.exports.listAllAuthors = (request, response) => {
     Author.find({})
